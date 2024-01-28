@@ -1,5 +1,7 @@
 import { Card } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ProjectContext } from "../context/ProjectDataContext";
 
 type PROJECT_DATA_TYPE = {
   name: string;
@@ -24,9 +26,15 @@ function Component() {
   );
 }
 
-function CardComponent({ project }: { project: PROJECT_DATA_TYPE }) {
+function CardComponent({
+  project,
+  onClick,
+}: {
+  project: PROJECT_DATA_TYPE;
+  onClick: (arg: string) => void;
+}) {
   return (
-    <Card className="w-[12rem] h-[12rem]">
+    <Card className="w-[12rem] h-[12rem]" onClick={() => onClick("sjdskjdb")}>
       <div className="flex flex-col items-center justify-center gap-2 select-none">
         <h5 className="mb-1 text-xl font-medium text-cyan-600 dark:text-white">
           {project.name}
@@ -43,31 +51,135 @@ async function getAllProject() {
   return JSON.parse(data);
 }
 
+function getMockResponse(): PROJECT_DATA_TYPE[] {
+  return [
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+    {
+      name: "Orca",
+      description: "Frontend Porject",
+      // teams_id: ["string"],
+      date_of_creation: "2022-04-30",
+      created_by: "763d52874391nuhrf2hc28y4rj",
+    },
+  ];
+}
+
 export default function Home() {
   const [projects, setProjects] = useState<PROJECT_DATA_TYPE[]>([]);
+  const navigate = useNavigate();
+
+  const context = useContext(ProjectContext);
 
   async function getData() {
-    const data: PROJECT_DATA_TYPE[] = await getAllProject();
+    const data: PROJECT_DATA_TYPE[] = getMockResponse();
     setProjects(data);
+    context?.setProjectData(
+      data.map((item) => {
+        return item.name;
+      })
+    );
   }
 
   useEffect(() => {
     getData();
   }, []);
 
+  function handleOnClickProjects(team_id: string) {
+    navigate(`/home/team/${team_id}`);
+  }
+
   return (
     <div className="flex flex-row flex-wrap gap-2">
       <Component />
-      <div className="flex flex-row">
-        {projects.length === 0 ? (
-          <div>Loading...</div>
-        ) : (
-          projects.map((item, idx) => {
-            console.log(Array.isArray(projects));
-            return <CardComponent project={item} key={idx} />;
-          })
-        )}
-      </div>
+      {projects.length === 0 ? (
+        <div>Loading...</div>
+      ) : (
+        projects.map((item, idx) => {
+          return (
+            <CardComponent
+              project={item}
+              key={idx}
+              onClick={handleOnClickProjects}
+            />
+          );
+        })
+      )}
     </div>
   );
 }
