@@ -1,4 +1,4 @@
-import { Sidebar, Navbar } from "flowbite-react";
+import { Sidebar } from "flowbite-react";
 import {
   HiArrowSmRight,
   HiChartPie,
@@ -6,22 +6,8 @@ import {
   HiShoppingBag,
   HiUser,
 } from "react-icons/hi";
-import Home from "./component/Home";
 
-function NavbarElement() {
-  return (
-    <Navbar fluid rounded>
-      <Navbar.Collapse>
-        <Navbar.Link href="#" active>
-          Home
-        </Navbar.Link>
-        <Navbar.Link href="#">Issues</Navbar.Link>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-}
-
-function SidebarElement() {
+export default function SidebarElement() {
   return (
     <Sidebar aria-label="Default sidebar example">
       <Sidebar.Items>
@@ -46,19 +32,3 @@ function SidebarElement() {
     </Sidebar>
   );
 }
-
-function App() {
-  return (
-    <div className="w-full h-screen flex flex-row">
-      <SidebarElement />
-      <main className="w-full">
-        <NavbarElement />
-        <div className="m-4">
-          <Home />
-        </div>
-      </main>
-    </div>
-  );
-}
-
-export default App;
