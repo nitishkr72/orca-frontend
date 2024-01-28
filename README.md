@@ -1,11 +1,11 @@
-# React + TypeScript + Vite
+# ORCA
 
 Project Management System
 
 ## Run code in local
 - Clone Frontend and backend in local
-- Run backend using `npm run serve`
-- Run frontend using `npm run dev`
+- Run [backend](https://github.com/nitishkr72/orca-node-backend) using `npm run serve`
+- Run [frontend](https://github.com/nitishkr72/orca-frontend) using `npm run dev`
 
 
 ## Expanding the ESLint configuration
