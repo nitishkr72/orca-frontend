@@ -44,12 +44,12 @@ function CardComponent({
   );
 }
 
-async function getAllProject() {
-  const res_body = await fetch("http://localhost:2000/project");
-  const data = await res_body.json();
+// async function getAllProject() {
+//   const res_body = await fetch("http://localhost:2000/project");
+//   const data = await res_body.json();
 
-  return JSON.parse(data);
-}
+//   return JSON.parse(data);
+// }
 
 function getMockResponse(): PROJECT_DATA_TYPE[] {
   return [
